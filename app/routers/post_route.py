@@ -4,12 +4,13 @@ from .. import models, schemas, utils, oauth2
 from ..database import get_db
 from sqlalchemy.orm import Session
 from sqlalchemy import func
+from typing import List
 
 
 router = APIRouter(prefix="/posts", tags=["Post"])
 
 
-@router.get("/", status_code=status.HTTP_200_OK, response_model=list[schemas.Post])
+@router.get("/", status_code=status.HTTP_200_OK, response_model=List[schemas.Post])
 def get_all_posts(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user),
