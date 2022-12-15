@@ -65,7 +65,7 @@ def get_post_by_id(
     return post
 
 
-@router.delete("/", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post_by_id(
     id: int,
     db: Session = Depends(get_db),
@@ -90,7 +90,7 @@ def delete_post_by_id(
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.put("/", response_model=schemas.Post)
+@router.put("/{id}", response_model=schemas.Post)
 def update_post_by_id(
     id: int,
     updated_post: schemas.PostCreate,

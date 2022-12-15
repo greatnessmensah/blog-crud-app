@@ -10,15 +10,20 @@ services:
       - ./:/usr/src/app:ro
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     environment:
-      - SQLALCHEMY_DATABASE_URL=postgresql://postgres:ishallbeaccepted@postgres/fastapi
+      - DATABASE_HOSTNAME=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_PASSWORD=ishallbeaccepted
+      - DATABASE_NAME=slightly
+      - DATABASE_USERNAME=postgres
       - SECRET_KEY=5cd00af19605d868c140f42d4d464c11d24c54f6889eb68b2fe2d2de57db8a08
-      - ACCESS_TOKEN_EXPIRE_MINUTES=30
       - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+
   postgres:
     image: postgres
     environment:
         - POSTGRES_PASSWORD=ishallbeaccepted
-        - POSTGRES_DB=fastapi
+        - POSTGRES_DB=slightly
 
     volumes:
         - postgres-db:/var/lib/postgresql/data
